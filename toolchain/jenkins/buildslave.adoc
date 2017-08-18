@@ -1,0 +1,82 @@
+Packages for Asciibuilder
+
+gem install --pre asciidoctor-pdf
+asciidoctor-diagram
+asciibinder
+
+
+libcairo2-dev
+pygtk
+
+python-pip
+npm
+nodejs
+
+blockdiag
+actdiag
+seqdiag
+nwdiag
+shaape
+mermaid
+phantomjs
+graphviz
+
+
+== Install AsciiDoc Buildslave from scratch
+
+=== General software requirements
+
+* Ubuntu 16.04.3 LTS
+* Ruby 2.3.x
+* Java 8
+
+=== Users / Group / Directories
+
+user jenkins
+----
+sudo useradd -m jenkins
+sudo -u jenkins mkdir /home/jenkins/.ssh
+----
+
+==== Packages
+
+.apt install
+----
+oracle java
+ruby
+ruby-dev
+perl
+python
+git
+imagemagick
+openssh-server (should be default)
+unzip
+zip
+tar
+gzip
+sed
+----
+
+NOTE: apt 'git' and ruby 'git' are two different packages! Both are required.
+
+.gem install
+----
+addressable
+ascii_binder
+coderay
+json
+git
+http-parser.rb
+css_parser
+ffi
+prawn
+pranw-svg
+prawn-icon
+prawn-svg
+prawn-table
+prawn-templates
+ascidoctor-pdf --pre
+rouge
+rake
+asciidoctor-diagram
+----

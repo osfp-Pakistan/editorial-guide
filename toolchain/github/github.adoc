@@ -1,0 +1,26 @@
+= GitHub Best Practices
+
+* Merge Strategy
+* Reviews
+* Labels
+** github-labels.adoc
+* Squashing
+* Cherry Picking
+
+== Commit Messages
+
+Please write your commit messages in the following format:
+
+* "Add new example to javascript element description"
+* "Remove obsolete document for license connector"
+
+IMPORTANT: Always include the place you have made changes e.g. "... in component x administration docs" so the customer can actively use the changelog to discover changes you made.
+
+== Files, filetypes and locations
+
+NOTE: Please refrain from adding very large binary files since GitHub is not designed to handle these efficiently. If your file is larger than 5MB please consider a different storage method or contact the project maintainer for advice.
+
+IMPORTANT: All Pull Requests containing files larger than 5MB without sufficient reasoning will be rejected.
+
+
+include::labels.adoc[GitHub Labels,leveloffset=+1]

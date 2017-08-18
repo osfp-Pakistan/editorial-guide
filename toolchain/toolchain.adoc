@@ -1,0 +1,53 @@
+== You will need
+
+* link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[git]
+* A link:https://github.com/join?source=header-home[GitHub account]
+* Membership in the link:https://github.com/orgs/arago/teams/hiro-documentation-collaborators[hiro-documentation-collaborators] team, you can request that on GitHub
+* link:https://atom.io[Atom] editor (or your favorite text editor)
+** link:http://flight-manual.atom.io/getting-started/sections/why-atom/[Atom Flight Manual]
++
+[TIP]
+====
+If you're using Atom install the packages "language-asciidoc" and "asciidoc-preview" by running
+
+----
+apm install language-asciidoc asciidoc-preview
+----
+
+or through the "Packages" dialog in Atom.
+====
+* (Optional) Asciidoctor.js Live Preview Extension for link:https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia?hl=en[Chrome] or  link:https://addons.mozilla.org/en-US/firefox/addon/asciidoctorjs-live-preview/[Firefox]
++
+NOTE: For the Chrome extension you need to enable "Allow access to file URLs" in "chrome://extensions/"
++
+* (Optional) link:https://evernote.com/skitch/[Skitch] (with the default settings) to create arrows and annotations for screenshots.
+
+== How to install
+
+IMPORTANT: This is under construction
+
+* gem install rouge
+
+=== Windows
+
+* https://rubyinstaller.org/downloads/[Install Ruby]
+* https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem[Install AsciiDoctor PDF]
++
+`gem install --pre asciidoctor-pdf`
+* https://github.com/atom/atom/releases/latest[Atom Editor]
+
+=== Mac OS
+
+* https://brew.sh/[Brew package manager]
+* `brew install ruby`
+* https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem[Install AsciiDoctor PDF]
++
+`gem install --pre asciidoctor-pdf`
+* https://github.com/atom/atom/releases/latest[Atom Editor]
+
+=== Linux
+
+* https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem[Install AsciiDoctor PDF]
++
+`gem install --pre asciidoctor-pdf`
+* https://github.com/atom/atom/releases/latest[Atom Editor]

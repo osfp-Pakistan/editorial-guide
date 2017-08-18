@@ -1,0 +1,110 @@
+= Document Structure
+:imagesdir: ../_images/
+
+== Document header
+
+The document header is the first few lines of the documents. I can contain attributes that control the behavior of the converter at runtime or metadata about the document. The most common entries in the header are
+
+* author - Author of the document
+* email - The authors email address
+* revdate - The date of the last revision
+* revnumber - The current version number of the revision
+* toc - Whether or not to use a table of contents
+
+Various other attributes are available that contain information about the directories used, the behavior of headline numbering and so on. This is explained in the AsciiDoctor user manual.
+
+The required attributes are described in the following parts of the guide.
+
+== Sections
+
+
+=== Headings
+
+Each document can only ever have on level 0 heading "=".
+
+Typically when you want to reuse your contents elsewhere through includes you must start with level 1 "==" in any case. Wrongly constructed heading structure will produce warnings during build but more importantly can cause entire document structures to shift.
+
+==== Numbering
+
+If you wish to use numbered sections please add the attribute ":sectnums:" in the header of the document.
+
+== Paragraphs
+
+=== Newlines
+
+Avoid adding newlines to structure the document. Your paragraphs should be contained by newlines
+
+=== Line breaks
+
+== Inline Anchors
+
+== Cross References
+
+== Images in tables
+
+In tables you should only use the inline image syntax with a single colon (`:`) (`+image:myimage.png[]+`). Block images will not work reliably.
+
+TIP: (PDF export only) If your table row is smaller (less high) than the image you are using it possibly will not be rendered in an exported document. Either add additional content to the table row to make the text expand the height of the row or resize your image to fit the cell height. Single icons typically pose this problem.
+
+== Code in tables
+
+== Included files
+
+// TODO:
+//
+// * Explain include
+// * Explain tags
+
+You can include files. This can be achieved by using line number ranges or tags set in the external files. To include a file you will use the include macro (`+include::[]`).
+We will refert to this type of file here as "includes" this always means the document included not the one including.
+
+Files that are supposed to be included should be designed to be handled as "includes" because of the way links are handled relatively if in an "include".
+
+=== Heading Offset
+You should design all your documents with the same structure as you would a top-level document. Start from the highest heading level and work down depending on the contents.
+When you eventually include one of these documents into an existing structure that already contains multiple headings you must adjust the level at which your "include" is injected into the existing order of document headings. For example your document looks like this:
+
+.Ext-doc.adoc
+----
+== This is my document
+
+It contains some content that I wish to include.
+----
+
+And you have included it in this document:
+
+.Master-doc.adoc
+....
+== This is my master document
+
+It already contains a lot of information
+
+== But it should also refer to external info.
+
+\include::Ext-doc.adoc[External info,leveloffset=+1] // <1>
+....
+<1> _leveloffset=+1_ will move the heading level down _1_ level to fit into the master document structure. Adjust this to your needs depending on where and how you included a document.
+
+== Ifdef and Ifndef Statements
+
+link:http://asciidoctor.org/docs/user-manual/#conditional-preprocessor-directives[Conditional Preprocessor Directives]
+
+For some output types you will want to have special versions of the document generated.
+This can be achieved by building logical statements into the document that include or exclude parts of the file or attributes.
+
+You can transform the structure and formatting of documents according to attribute values with this command. There are a lot of possibilities.
+
+== Restrictions and Tips
+
+If a command or paragraph requires some special consideration or has a restriction, always place the note describing the restriction *before* the actual content.
+The user will process the instructions step-by-step and if a restrictions is mentioned "after" the action there might be errors and misconfiguration.
+
+=== Incorrect
+
+Then copy that file to all servers as `/opt/autopilot/conf/topology.yaml` (directory must be created first.)
+
+=== Correct
+
+IMPORTANT: You must create a directory for the next command to work. Run `mkdir -p /opt/autopilot/conf/`.
+
+Then copy that file to all servers as `/opt/autopilot/conf/topology.yaml`.

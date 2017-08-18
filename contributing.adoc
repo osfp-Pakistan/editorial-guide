@@ -1,0 +1,193 @@
+= Contributing to HIRO Documentation
+:imagesdir: images
+
+TIP: We highly value contribution. Please join the https://github.com/orgs/arago/teams/hiro-documentation-collaborators[hiro-documentation-collaborators].
+
+include::toolchain/toolchain.adoc[Toolchain]
+
+== How to contribute
+
+The short form is:
+
+* Clone repository
+* Branch off
+* Make changes
+* Commit changes
+* Push branch
+* Make pull request
+* Rework
+
+=== Clone the repository
+
+Once you have set up git on your machine, created an account on GitHub and have access to the collaborators team, you can start working.
+
+Navigate to your favorite directory and run:
+
+----
+git clone https://github.com/arago/hiro-documentation
+----
+
+You will be asked for credentials. Enter your GitHub username and password. This will create a  called "hiro-documentation" on your machine that contains the full state of the GitHub repository; including all sub branches.
+
+=== Checkout the 'right' branch
+
+Most of the work that is going into the documentation is done on the 'develop' branch. If you do not know which version your documentation will pertain to, assume that it is for the latest version. If you have a contribution that will affect multiple versions, please contact the maintainer or create multiple pull requests (we will cover that later).
+
+For this guide we assume you want to add some content to the latest version so you must checkout "develop".
+
+----
+git checkout develop
+----
+
+Git will load the develop branch into the directory.
+
+TIP: You can check which branch you are on by using `git branch`
+
+=== Make some changes
+
+Now you can use your editor of choice to make some changes to the documentation. You can create, delete, modify any file you want. It will not affect the online repository because you are working on your offline copy.
+
+The syntax used is link:http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc]. If you have installed one of the browser extensions you can preview your ".adoc" files like they would look in Asciidoctor. They will look slightly different in the final documentation template but it should be sufficient to account for correct syntax.
+
+TIP: Asciidoctor is way more powerful and has quite a large link:http://asciidoctor.org/docs/user-manual/[User Manual]
+
+IMPORTANT: Due to the nature of the used toolchain, there are some counterintuitive behaviors of included pages, links and images. The maintainer will work with you through the Request/Review process to create fully functional documents.
+
+=== Branch off your changes
+
+NOTE: You can also branch off before making changes but follow this beginners guide for now.
+
+IMPORTANT: It's important that you have checked out the branch that you actually want to branch off into your own branch.
+
+Once you have made enough changes, you should create your own branch so they can be cleanly merged into "develop" by the maintainers. Run:
+
+----
+git checkout -b <type-your-new-branch-here> // <1>
+----
+<1> For example "git checkout -b my-fixes"
+
+This now creates a local branch called `my-fixes` of the repository that contains your changes.
+
+TIP: Give your branch a name that allows identifying it either by your name/handle or the type of change you have made or even a combination of both (e.g. `mnapp-cluster-docs`).
+
+=== Add and Commit your changes
+
+In the next step you must "commit" your changes to the branch. This means you select changes that will later be tracked under the same commit number. You can do this very selectively or with a lot of changes at once.
+
+To find out which changes are not yet committed run:
+
+----
+git status
+----
+
+You should see a list of red paths and filenames that correspond with the changes you have made earlier. Now you will select which files (read: which changes) are going to be added to your next commit.
+
+TIP: If file and pathnames are green you have already added them to your next commit. To remove added changes run `git reset` this will reset the branch to the last committed change.
+
+We assume here that you simply wish to add all your current changes to the branch so you simply run:
+
+----
+git add . // <1>
+----
+<1> Add the current directory (`.`)
+
+You will see the same files and paths now show up in green.
+
+Now it's time to create a link:https://en.wikipedia.org/wiki/Commit_(version_control)[commit] that contains your added changes.
+
+----
+git commit -m "<Type a useful message here>" // <1>
+----
+
+<1> All commits must have a commit message that can tell the maintainer and other developers what you are trying to achieve with the change.
+
+The correct format for a commit message is:
+
+* "Fix spelling in installation guide" +
+or
+* "Add new page for administration of component X"
+
+TIP: Imagine your commit message as a spoken word "patch" and describe what your change will do once applied.
+
+You will see something like this:
+
+[source,bash]
+----
+git commit -m "Add contributing info first version"
+[my-fixes 7fca232] Add contributing info first version
+ 2 files changed, 141 insertions(+)
+ create mode 100644 CONTRIBUTING.adoc
+ create mode 100644 create_pr.png
+----
+
+This means your commit has the shortened ID "7fca232".
+
+=== Push your changes
+
+Now you have a local branch with some changes that do not exist in the online repository. To get the changes integrated you need to first upload your branch to the central repository and then request adding the changes.
+
+TIP: The activity of combining changes from two repositories/branches is called a "merge" and what you want to do here is a "Pull request" (read: Pull your changes into the central repository) so the maintainer can merge them.
+
+You will run:
+
+----
+git push origin my-fixes // <1>
+----
+
+<1> You will _push_ your newly created branch `my-fixes` to the remote repository "origin" (by default this is the repository that you cloned in the first step).
+
+You will see something like:
+
+[source,bash]
+----
+git push origin my-fixes
+Counting objects: 134, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (77/77), done.
+Writing objects: 100% (134/134), 35.16 KiB | 0 bytes/s, done.
+Total 134 (delta 95), reused 96 (delta 57)
+remote: Resolving deltas: 100% (95/95), completed with 34 local objects.
+To https://github.com/arago/hiro-documentation
+ * [new branch]      my-fixes -> my-fixes
+----
+
+This will create a new branch on GitHub called `my-fixes` which contains all of your commits.
+
+NOTE: Only the commits that you have pushed from your local repository will show up there. Any changes that you have not committed will not be tracked in the remote branch.
+
+=== Create a pull request
+
+Now you navigate to the link:https://github.com/arago/hiro-documentation/branches[branches list] of the project on GitHub.
+
+Locate your branch and click on "New Pull Request".
+
+image::create_pr.png[width=600]
+
+In the next window you select
+
+image::create_pr2.png[width=600]
+
+. The base branch `base:develop`
+. Which branch it will be compared to `compare:my-fixes`
+. The commit message of your last change will become the overall description, if your commit message is not great please add a good description here
+. (Optional) Add a detailed description of what you have changed, this might be necessary if the maintainer does not directly have insight in why you might have changed certain structures or content.
+. Submit your pull request
+
+NOTE: Just creating the pull request does not change anything in the main repository. The maintainer must manually agree to take in the changes. This is the place where all review and content discussion should take place after the initial work is done.
+
+=== Work with the maintainer
+
+Now your pull request will be reviewed and if everything went smoothly it will be merged straight away. You might receive comments or questions in your pull request about the changes so please keep an eye out for those.
+
+[NOTE]
+====
+Please consider that your contribution must be of good (enough) quality to be accepted. The maintainer(s) will not merge pull requests that must be reworked significantly. During review you might be asked to correct formatting and style to live up to the standards of the documentation. The editorial guide is your weapon of choice to develop good style.
+
+If certain topics are not (sufficiently covered) in the editorial guide please add them or ask the maintainer to clarify for all future contributors.
+====
+
+Once your changes have been merged the remote branch will be deleted. Don't worry you can push your local branch again at any time.
+
+If you are a maintainer for the docs please check out the link:maintainers.adoc[Information for maintainers]
+
+NOTE: Thanks for contributing to the HIRO documentation!

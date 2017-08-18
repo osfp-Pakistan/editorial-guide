@@ -1,0 +1,51 @@
+= Document Attributes
+
+:imagesdir: ../_images/
+
+== Header Attributes
+
+=== Author
+
+==== Name
+
+==== Email
+
+=== Revision Number
+
+=== Revision Date
+
+=== Free attributes
+
+One example of the use of free examples is the <<pdf-links>> section.
+
+=== Toggles
+
+==== TOC
+
+==== Section Numbering
+
+== Freetext attributes
+
+=== Substitutions
+
+You can substitute strings in your document by setting an attribute and referencing it in the text.
+
+----
+:myattribute: StringA
+I want to insert {myattribute} into this sentence.
+----
+
+:myattribute: StringA
+I want to insert {myattribute} into this sentence.
+
+To make this work in tables or source blocks you need to add the `subs` option.
+
+----
+[subs="attributes"]
+This is an example code block that uses {myattribute}
+----
+
+[subs="attributes"]
+----
+This is an example code block that uses {myattribute}
+----

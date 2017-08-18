@@ -1,0 +1,435 @@
+= Formatting Instructions
+:quickstart: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+:imagesdir: ../_images/
+
+== Text formatting
+
+For the "regular" formatting options (bold, italics, monospace etc.) please check out the link:{quickstart}[AsciiDoctor Syntax Quick Reference] since this covers these topics (and others) extensively.
+
+NOTE: This document will explain the style we have decided on to use in the Arago documentation and some less obvious usage patterns and options.
+
+TIP: Many text elements allow for link:http://www.methods.co.nz/asciidoc/userguide.html#X96[Quoted Text Attributes] for even more powerful formatting options.
+
+== Special text formatting
+
+Our instructions typically contain various special text elements that need to be communicated to the user.
+
+=== Example
+
+----
+Please set the Port for ZooKeeper to "2181" in the file `/opt/autopilot/conf/aae.yaml`. Make sure the attribute `Allowed` is set.
+----
+
+Please set the Port for ZooKeeper to "2181" in the file `/opt/autopilot/conf/aae.yaml`. Make sure the attribute `Allowed` is set.
+
+== Underline text
+
+If you wish to underline a text you need to use this syntax:
+
+----
+This is my [underline]#underlined text#
+----
+
+This is my [underline]#underlined text#
+
+== Strike through
+
+To strike through text you need to use this syntax:
+
+----
+This instruction is [line-through]#valid for HIRO 5.4# no longer valid.
+----
+
+This instruction is [line-through]#valid for HIRO 5.4# no longer valid.
+
+IMPORTANT: Strikethrough is to be avoided as much as possible.
+
+== Special Characters
+
+If you need to add emphasized characters to a description enclose them in curly brackets and the backtick inline syntax.
+
+----
+In some cases you must add a backslash (`\`) to escape characters in JSON.
+----
+
+In some cases you must add a backslash (`\`) to escape characters in JSON.
+
+TIP: The syntax should be able to handle most special characters. If you need to add a special Ascii character please refer to the link:http://asciidoctor.org/docs/user-manual/#replacements[Replacements syntax].
+
+== Warning boxes (Admonition)
+
+The text boxes are called "Admonition" and you can find their syntax described here:
+
+* link:{quickstart}#admon-bl[Quick Reference]
+* link:http://asciidoctor.org/docs/user-manual/#admonition[AsciiDoctor Manual]
+
+=== Basic Usage
+
+----
+NOTE: This is a short note.
+
+[TIP]
+====
+This is a much longer tip.
+
+It can include line breaks and all kinds of link:google.com[content]
+====
+----
+
+NOTE: This is a short note.
+
+[TIP]
+====
+This is a much longer tip.
+
+It can include line breaks and all kinds of other link:google.com[content]
+====
+
+=== Use of Admonition type
+
+The different Admonition types are used to communicate with the user that a passage might be of special interest or contains additional information. Use admonition types only as described below to keep consistent across the content.
+
+[options="header",cols=2]
+|===
+|Admonition type
+|Usage reserved for
+
+|NOTE
+|General remarks. As the name suggests "notes" that the user *will want to know and needs to consider*.
+
+|TIP
+|Give tipps how the user can *optimize their workflow* and for generally "not quite obvious" tipps and tricks.
+
+|IMPORTANT
+|Use this block to point out *details that the user might overlook* that could lead to confusion. Mention important settings, files, procedures etc.
+
+|CAUTION
+|Use the Caution label to warn the user that certain steps, if not performed correctly, can lead to a *broken installation/configuration*. This should be reserved for cases that are (easily) *recoverable*.
+
+|WARNING
+|If a potential mistake can lead to *data loss or severe damage* to the installation (e.g. removing database tables, directories etc.) warn the user explicitly.
+|===
+
+== File names
+
+Use the xref:backticks[backtick] (+`+) inline code syntax.
+
+----
+Please add the hostname configuration to `/etc/hosts`.
+----
+
+Please add the hostname configuration to `/etc/hosts`.
+
+== Package names
+
+The same applies for package names that are not yet present on the user system or must be downloaded/installed.
+
+(.rpm/.deb/.zip etc.) use the backtick syntax.
+
+----
+Please install `your-package-1.4.2.rpm`
+----
+
+Please install `your-package-1.4.2.rpm`
+
+== Path names
+
+Use the xref:backticks[backtick] (+`+) inline code syntax.
+----
+You can find the configuration files in `/opt/autopilot/conf/`.
+----
+
+You can find the configuration files in `/opt/autopilot/conf/`.
+
+== Ports
+
+Use the xref:backticks[backtick] (+`+) inline code syntax.
+The correct order for a port description is `_PORT/PROTOCOL_` e.g. `_9443/TCP_`.
+----
+The reverse-proxy/load-balancer is working and can connect to `_9443/TCP_` on both nodes
+----
+
+== Factory Names
+
+Use the xref:backticks[backtick] (+`+) inline code syntax.
+----
+After retrieving all configuration settings, create the `DatatransformerInstance` and inject this into the constructor of the `CBProducerSender`.
+----
+After retrieving all configuration settings, create the `DatatransformerInstance` and inject this into the constructor of the `CBProducerSender`.
+
+== Class Names
+
+Use the xref:backticks[backtick] (+`+) inline code syntax.
+
+----
+To transform you messages into the process specific SDF you should implement your own `de.arago.connectit.base.producer.DataTransformer`
+----
+
+To transform you messages into the process specific SDF you should implement your own `de.arago.connectit.base.producer.DataTransformer`
+
+== Function calls
+
+Use the xref:backticks[backtick] (+`+) inline code syntax.
+
+----
+The method `processSDF(SDF sdf)` will be invoked every time a message has been received from the connector.
+----
+
+The method `processSDF(SDF sdf)` will be invoked every time a message has been received from the connector.
+
+== URLs
+
+We need to distinguish between hyperlinks we want to point to the web or other resources and URL/URi/pURL that we need to show in their raw form.
+
+=== External links
+
+Please use the following format:
+
+----
+I want to show you link:https://this-is-my-url.com/[my great website]
+----
+
+I want to show you link:https://this-is-my-url.com/[my great website]
+
+NOTE: Add the "link:" macro and closing with the attribute list (even if it's empty) is important to properly render links inside the pages and flowing text.
+
+=== Email links
+
+The link is constructed like `+mailto:address[Text, Subject, Body]+`
+
+----
+If you have any questions please write me an mailto:mnapp@arago.co[eMail, Contributor question, Hi I've got a question about hiro-documentation]
+----
+
+If you have any questions please write me an mailto:mnapp@arago.co[eMail, Contributor question, Hi I've got a question about hiro-documentation]
+
+=== Raw URLs
+
+There are many occasions where you will want to display a URL in its raw form. Use the xref:backticks[backtick] (+`+) inline code syntax. To avoid automatic URL parsing, add a (`+`) before and after the URL.
+
+----
+In your environment you will go to `+https://my-hostname:8888/apps/+`
+----
+
+In your environment you will go to `+https://my-hostname:8888/apps/+`
+
+[NOTE]
+====
+If you do not include the (+++) sign it will generate a broken clickable link:
+
+In your environment you will go to `https://my-hostname:8888/apps/`
+====
+
+== Variables/Attributes
+
+=== Variable/Attribute names
+
+Use the xref:backticks[backtick] (+`+) inline code syntax.
+
+=== Variable/Attribute values
+
+Use italics to show values that need to be set.
+
+----
+Please set the `Port` to __2181__
+----
+
+Please set the `Port` to __2181__
+
+=== Key:Value Pairs
+
+If you want to display complete "Key:Value" pairs please use Italics and the backtick syntax.
+
+----
+Please set `__Port:2181__` in `/opt/autopilot/conf/arago.yaml`
+----
+
+Please set `__Port:2181__` in `/opt/autopilot/conf/arago.yaml`
+
+=== Defaults
+
+When describing variables or attributes of which a default value is known please include it in the decription where it makes sense.
+
+----
+For a proxy setup the `Port` must be __7285__ (Default: __7284__)
+----
+
+For a proxy setup the `Port` must be __7285__ (Default: __7284__)
+
+== Images
+
+There are two types of image links.
+
+* Block image
+* Inline image
+
+For the correct display of images in exported documents it sometimes is necessary to use block image syntax.
+
+NOTE: For correct scaling of images in PDF documents you need to use block image syntax.
+
+The normal inline image syntax looks like this:
+
+----
+image:/path/to/my_image.jpg/.png[width=?,my_image.jpg/.png]
+----
+
+Block image syntax simply add an additional colon (`+:+`) to the image macro.
+
+----
+image::/path/to/my_image.jpg/.png[width=?,my_image.jpg/.png]
+----
+
+IMPORTANT: Asciibinder implicitly looks for images in a directory `images` in the same  as the document. If you include a document in a different location the image must be copied to the images  where it is included.
+
+NOTE: Always use the image filename as the alt text, this will aid in debugging missing images with our external tools.
+
+== Code
+
+Code highlighting is done using the link:http://pygments.org/[pygments library] by default.
+
+TIP: If you require a different hightlighter for your document please check the link:http://asciidoctor.org/docs/user-manual/#source-code-blocks[available options]
+
+=== Code blocks
+
+Please describe code blocks as best as you can. If you know the source language please add it to the +[source]+ element.
+
+NOTE: Including actual Asciidoctor source syntax for examples is somewhat tricky so please refer to the {quickstart}[Quick Reference] to see how to properly include source blocks.
+
+TIP: You can add numbered comments to your code by using link:http://asciidoctor.org/docs/user-manual/#copy-and-paste-friendly-callouts[Callouts]
+
+[[backticks]]
+=== Inline Code
+
+Single lines of code should be enclosed in backticks. This can be used for lines standing alone or within flowing text.
+
+----
+To update your system run `yum clean all && yum update`
+----
+
+To update your system run `yum clean all && yum update`
+
+== Lists
+
+=== unnumbered / unordered
+
+link:http://asciidoctor.org/docs/user-manual/#unordered-lists[Unordered lists]
+
+The correct format is:
+
+----
+* First entry
+** First sub entry
+* Second entry
+** Second sub entry
+*** Sub-sub entry
+* Third entry
+----
+
+* First entry
+** First sub entry
+* Second entry
+** Second sub entry
+*** Sub-sub entry
+* Third entry
+
+=== numbered / ordered
+
+link:http://asciidoctor.org/docs/user-manual/#ordered-lists[Ordered lists]
+
+The correct format is:
+
+----
+. First entry
+. Second entry
+.. Second sub entry
+. Third entry
+
+A long description that is used to elaborate the third point but breaks the list.
+
+[start=4]
+. A fourth entry
+----
+
+. First entry
+. Second entry
+.. Second sub entry
+. Third entry
+
+A long description that is used to elaborate the third point but breaks the list.
+
+[start=4]
+. A fourth entry
+
+TIP: The numbering and ordering syntax for lists is very powerful. Please refer to the link:http://asciidoctor.org/docs/user-manual/#ordered-lists[AsciiDoctor Manual] for advanced options.
+
+== Tables
+
+=== Syntax
+There are many syntax variants to create a table in AsciiDoc. This gives users a lot of flexibility but is also confusing. The preferred variant of the syntax is the "one line per cell" syntax.
+
+The basic table syntax is described in the {quickstart}[Quick Reference]
+
+For more elaborate formatting options (cells spanning multiple rows/columns, centered/aligned content etc) please refer to the link:http://www.methods.co.nz/asciidoc/userguide.html#_tables[Advanced Syntax Options]
+
+=== Titles
+Please add a title to your table.
+
+----
+.Table of Ports
+[cols="2"]
+|===
+|Port
+|Description
+
+|1234
+|Used port for protocol x
+|===
+----
+
+.Table of Ports
+[cols="2"]
+|===
+|Port
+|Description
+
+|1234
+|Used port for protocol x
+|===
+
+=== Headers
+
+----
+[options="header",cols="2"]
+|===
+|First header
+|Second header
+
+|Content Row 1 Column 1
+|Content Row 1 Column 2
+
+|Content Row 2 Column 1
+|Content Row 2 Column 2, content can be longer
+and even contain multiple lines
+|===
+----
+
+[options="header",cols="2"]
+|===
+|First header
+|Second header
+
+|Content Row 1 Column 1
+|Content Row 1 Column 2
+
+|Content Row 2 Column 1
+|Content Row 2 Column 2, content can be longer
+and even contain multiple lines
+|===
+
+=== Columns and formatting
+
+The formatting options for rows and columns are very powerful and varied.
+
+Please refer to the tables section of the link:http://asciidoctor.org/docs/user-manual/#tables[AsciiDoctor manual]
+
+TIP: A great breakdown of common table formatting use cases can be found in the link:http://www.methods.co.nz/asciidoc/userguide.html#_tables[Alternate AsciiDoctor manual]

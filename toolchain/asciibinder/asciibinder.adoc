@@ -1,0 +1,110 @@
+= AsciiBinder
+:imagesdir: ../_images/
+
+== Distro names
+
+When you add new branches to the _distro_map.yml file you must use the exact name of the branch as the "name".
+
+IMPORTANT: Filenames and Branch names with three characters or less are not supported. A version branch `5.4` will not work. It will generate a string comparison error on build. Use at least four character names for everything.
+
+IMPORTANT: Since version 0.1.10.1 distro names can no longer contain periods. The id `hiro-5.4` will give an error about invalid string. Only use letters.
+
+[source]
+----
+hiro-online:
+  name: HIRO
+  author: HIRO Team
+  site: main
+  site_name: HIRO Documentation
+  site_url: http://docs.hiro.arago.co/
+  branches:
+    develop:
+      name: develop // <1>
+      dir: develop
+    5.4.0:
+      name: 5.4.0
+      dir: 5.4.0
+----
+
+<1> "develop" will be translated in the search index to: `<host>/<name>/<filepath>.html`. If this does not correspond to the actual branch file path the search index will be broken.
+
+
+== Topic Map
+
+IMPORTANT: Filenames and Branch names with three characters or less are not supported. A version branch `5.4` will not work. It will generate a string comparison error on build. Use at least four character names for everything.
+
+The topic map defines which pages are actually converted into HTML. Each file you wish to have as an HTML file must be part of the `_topic_map.yml` file.
+
+Filenames (before the extension) *must* be longer than three characters or they will not be recognized. A page `ki.adoc` will not work.
+
+The topic map consists of a YAML structure that can have up to three levels of depth. It describes the projects document root broken down into directories (Dir) and pages. If you wish to list multiple files from within a directory you must use the "Topics" structure.
+
+For example:
+
+----
+Name: Administration
+Dir: administration
+Topics:
+  - Name: Java Installation
+    File: java
+  - Name: Config File Reference
+    File: cfg-reference
+  - Name: Network Time Server
+    File: ntp
+---
+Name: Frontend
+Dir: frontend
+Topics:
+  - Name: Cockpit
+    File: cockpit
+  - Name: KI Editor
+    File: ki-editor
+----
+
+This will generate two main navigation points "Administration" and "Frontend" with their respective sub-points. Notice that three dashes `---` are the delimiter for a major navigation element.
+The filenames for the "File" entries must be exactly the file names (*without extension*) as they are stored in the project.
+
+== Generate Changelog
+
+In order to generate the Changelog format run this command in the respective branch:
+
+[source,bash]
+----
+git log --pretty=format:"* *%cd* - %s (%t)" --date=format:"%d-%b-%Y" --after=<DATE> --simplify-merges | grep -v -e "fixup" -e "Merge pull request" -e "Merge branch"
+----
+
+Adjust the `<DATE>` portion to the date of the last release so all following commits are tracked.
+
+This will produce changelog messages of the format:
+
+----
+* *09-Jan-2017* - Switch path to UpdateSet (5c4df5e)
+* *09-Jan-2017* - Update Automate manual (5f3add0)
+* *06-Jan-2017* - Fix some links (1ff1c19)
+----
+
+=== Cleaning Changelog before publishing
+
+Go through the results and fix malformed commit messages and remove internal information that should not be published to customers (e.g. other customer specific messages and changes).
+
+=== Make available
+
+Commit the changes into the file `general-information/changelog/<RELEASE>/documentation.adoc` (adjust `RELEASE` for the current release).
+Make sure the files `welcome/index.adoc` and your latest changelog meta file have the correct include to the latest file.
+
+:imagesdir: ../_images/
+
+== Special considerations for Asciibinder
+
+=== Include pages
+
+[IMPORTANT]
+====
+The include behavior of AsciiDoctor is confusing.
+
+If a page is included in the top level document it will need an absolute path in the macro.
+
+If however an include statement is on a page that is itself included it will require a relative path. This can lead to some trouble. Keep this in mind when designing nested document structures.
+
+link:http://asciidoctor.org/docs/user-manual/#include-resolution[Explanation]
+====

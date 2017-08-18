@@ -1,0 +1,21 @@
+= TODOs for editorial  guide
+
+
+<<<
+
+== TODO
+
+* Add information about structure
+* Add information about highlighting source code lines
++
+http://mrhaki.blogspot.de/2016/10/awesome-asciidoctor-highlight-lines-in.html
+* Add description of label usage for Pull requests
++
+https://github.com/arago/hiro-documentation/labels
+* Add information about `rouge` highlighter for code linenums in PDF
+
+
+== Done
+
+* Switch default highlighter for PDF to `rouge`
+** Add instruction to install rouge gem

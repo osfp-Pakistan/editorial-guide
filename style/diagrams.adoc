@@ -1,0 +1,74 @@
+TIP: You can try out various diagram formats with this helpful link:https://www.planttext.com/[online tool]
+TIP: To create basic DITAA diagrams you can use the link:http://asciiflow.com/[AsciiFlow Online editor]
+
+=== Diagrams
+
+You can include various Ascii art type diagrams (plantUML, ditaa etc.) to your documents. To do so either put them as inline blocks into the document or include a block macro to your page.
+
+NOTE: The block name/macro is determined by the format of the diagram you wish to include. Please refer to the link:http://asciidoctor.org/docs/asciidoctor-diagram/#creating-a-diagram[list of supported diagram types] to find out what you need to use.
+
+For example to add a ditaa diagram, you add the diagram inline:
+
+[source]
+----
+[ditaa]
+....
+                   +-------------+
+                   | Asciidoctor |-------+
+                   |   diagram   |       |
+                   +-------------+       | PNG out
+                       ^                 |
+                       | ditaa in        |
+                       |                 v
+ +--------+   +--------+----+    /---------------\
+ |        | --+ Asciidoctor +--> |               |
+ |  Text  |   +-------------+    |   Beautiful   |
+ |Document|   |   !magic!   |    |    Output     |
+ |     {d}|   |             |    |               |
+ +---+----+   +-------------+    \---------------/
+     :                                   ^
+     |          Lots of work             |
+     +-----------------------------------+
+....
+----
+
+This is processed by the link:http://www.graphviz.org/Documentation.php[graphviz library] and other components to be displayed like this:
+
+image::asciidoctor-diagram-process.png[AsciiDoctor diagram process]
+
+To find out which formats are supported check out the documentation for link:http://asciidoctor.org/docs/asciidoctor-diagram/[Asciidoctor-diagram].
+
+==== External diagrams
+
+You can also store diagrams in separate files. To include such a file you must include via a macro for example the above diagram stored in a `ditaa.txt`:
+
+----
+ditaa::path/to/my.file[My diagram]
+----
+
+IMPORTANT: You must use an absolute path from the project root to link to the diagram otherwise Asciibinder will not find it.
+
+=== Advanced features
+
+TIP: There are some link:https://github.com/asciidoctor/asciidoctor-diagram/issues/69#issuecomment-89584825[advaced options] for DITAA.
+
+The Ditaa extension supports the options `scale`, `antialias`, `separation`, `round-corners`, `shadows` and `debug`
+
+Options can be specified per block as `<option>=<value>` or globally as a document attribute of the form `:ditaa-option-<option>: <value>`
+
+Block level options override global options
+
+Default values are Ditaa's defaults
+
+The semantics of the options are
+
+[options="heeader"]
+|===
+|Option|Usage
+|`scale`|Scale factor specified as a decimal number (e.g. scale=1.5)
+|`antialias`|`true` to enable antialiasing; false to disable it
+|`separation`|`true` to leave spacing between adjacent blocks; false to remove it
+|`round-corners`|`true` to force round corners everywhere; false to use corner style from diagram
+|`shadows`|`true` to enable drop shadows; false to disable them
+|`debug`|`true` to display a debug grid in the diagram; false to remove it
+|===

@@ -1,0 +1,122 @@
+= Export to PDF
+
+:imagesdir: ../_images/
+:source-highlighter: pygments
+
+[[export-pdf]]
+== Install toolchain
+
+NOTE: This instruction is designed for installation on macOS. Installation under Linux based systems usually works through the provided distribution repositories.
+To install in Windows you will need to setup Ruby and it's dependencies yourself.
+
+The main tool you will need is link:http://asciidoctor.org/docs/convert-asciidoc-to-pdf/[AsciiDoctor-PDF] but you need to fulfill it's requirements.
+
+Install link:http://brew.sh[brew] by running:
+
+----
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+----
+
+Then install ruby by running:
+
+----
+brew install ruby
+----
+
+Once finished install the rest of the toolchain:
+
+* AsciiDoctor
+* AsciiDoctor-PDF
+* Rouge
+
+NOTE: You will have to perform this operation as super user/admin.
+
+----
+gem install asciidoctor --pre asciidoctor-pdf rouge
+----
+
+== Export a document
+
+NOTE: This will export the file with the default Asciidoctor template.
+
+To convert a document you then use:
+
+----
+asciidoctor-pdf yourdocument.adoc
+----
+
+=== Export with Arago template
+
+If you need to generate a arago styled PDF document use this command and adapt your pathnames:
+
+NOTE: Replace _$HIRO_DOCS_ with the path to the place you checked the Git project out.
+
+NOTE: Replace `your-file.adoc` with the file you wish to convert. The resulting PDF will be saved in the same location as the source file.
+
+.makepdf.sh
+[source,bash,linenums,highlight=10-11]
+----
+#!/bin/bash
+
+asciidoctor-pdf \
+--trace \
+-r asciidoctor-diagram \
+-a toc \
+-a icons=font \
+-a source-highlighter=rouge \
+-a pdf-style=arago \
+-a pdf-stylesdir=$HIRO_DOCS/_pdf-template/. \
+-a pdf-fontsdir=$HIRO_DOCS/_fonts/ \
+$1
+----
+
+IMPORTANT: If your document contains diagrams, add the "-r asciidoctor-diagram" parameter to process the diagrams.
+
+TIP: The generated document will be created in the same directory as the input document.
+
+[[pdf-links]]
+== Correct linking for PDF
+
+The PDF export is based on the AsciiDoctor-PDF library which handles links differently than AsciiBinder. In order to be able to simultaneously have a document that can be used by both we must define some logic that rewrites certain links.
+
+For the PDF all links within a document must be specified as a *relative path* from the document on which the PDF converter is called. For example:
+
+[salt,format="svg"]
+----
+{
+    {T
+     + install-config
+     ++ standard
+     +++ setup-standard.adoc
+     +++ node-iam.adoc
+     +++ node-database.adoc
+     ++ verify
+     +++ verify-database.adoc
+     +++ verify-engine.adoc
+    }
+}
+----
+
+When you want to include ``install-config/verify/verify-database` in `install-config/standard/setup-standard` for the normal version you would write:
+
+----
+\include::install-config/verify/verify-database.adoc[Verify Database]
+----
+
+This will not work for the PDF converter since it can't find this file. Therefore you must define "When this is rendered by the PDF backend, change the link to". Which you can do like this:
+
+----
+\ifdef::backend-pdf[]
+:directory: ../verify/
+\endif::[]
+
+\include::{directory}verify-database.adoc[Verify Database]
+----
+
+Now _if_ the PDF backend (backend-pdf) is detected the value of the free attribute "directory" will be changed to a relative prefix and create a working link for the PDF generator.
+
+[[pdf-images]]
+== Images in PDF
+Currently all images that are used in the PDF must be located in a  `images` in the location where the `*.adoc` file resides that you wish to convert.
+
+// You can also symlink images to this  to avoid storing duplicate copies in the project.

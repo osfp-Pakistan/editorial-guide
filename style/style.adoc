@@ -1,0 +1,27 @@
+= Writing style
+
+The documentation is aimed at the reader.
+
+Directly address the reader in your instructions.
+
+* "Click on Save to continue"
+* "You must modify the file in <path>"
+* "To change the configure port you must edit the configuration file <filename>"
+
+== DONT'S
+
+=== Avoid complexity
+
+Do not overcomplicate sentences. If you need to put three concepts into a sentence split it into multiple sentences. e.g.:
+
+.Bad
+----
+"You must add the configuration file in <path> and update the settings in <filename> afterwards, restart the machine."
+----
+
+.Better
+----
+"Add the configuration file for the service in <path>. Open <filename> and enter the location of the configuration file you have just added. Restart the service by using <command>."
+----
+
+This helps users parse the instructions one-by-one instead of having to filter the correct order out of the long constructed sentece.

@@ -1,0 +1,82 @@
+= Editorial Guide for Arago Documentation
+:author: Markus Napp
+:email: mnapp@arago.co
+:revnumber: 1.5 DRAFT
+:revdate: 18/08/2017
+:doctype: book
+:toc:
+:sectnums:
+:sectnumlevels: 4
+:imagesdir: ../_images/
+:directory:
+ifndef::backend-pdf[]
+:directory: contributing/
+endif::[]
+
+<<<
+
+include::{directory}contributing.adoc[Contributor Quickstart,leveloffset=+1]
+
+== File Format and Workflow
+
+* http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc Quick Syntax Reference]
+* http://asciidoctor.org/docs/user-manual/[AsciiDoctor User Manual - Long Read]
+* http://asciidoctor.org/docs/asciidoc-writers-guide/[AsciiDoc Writers Guide]
+* http://asciidoctor.org/docs/asciidoc-recommended-practices/[AsciiDoc Best Practices] (Need to review)
+* http://www.methods.co.nz/asciidoc/userguide.html[Alternate AsciiDoc Manual]
+* http://www.methods.co.nz/asciidoc/[Great AsciiDoc Resource]
+* http://www.asciibinder.org/latest/guides/user_guide.html[AsciiBinder Users Guide]
+* http://www.asciibinder.org/latest/guides/maintainer_guide.html[AsciiBinder Maintainers Guide]
+
+=== File extensions
+
+It's is much preferred to use the suggested default file types and extensions:
+
+==== Documents
+
+Text documents that are part of the contribution should be in AsciiDoctor syntax (`.adoc`). This allows us to efficiently manage changes and ensure a corporate identity and style across the published documents. If you need to generate a "hard" version of a specific document version you can link:editorial-guide.html#export-pdf[export it to PDF] using the asciidoctor-pdf tool.
+
+Exported PDFs *must* be placed in the `+_pdfs+`  of the root project. The _gitignore_ file is set up to ignore them everywhere else and will get omit them from commits and branches.
+
+==== Images
+
+Preferred image formats are:
+
+* Portable Network Graphics - PNG (.png)
+* Joint Photographic Experts Group - JPEG (.jpg/.jpeg)
+* Scalable Vector Graphics - SVG (.png)
+
+[TIP]
+====
+* PNG is preferred for screenshots
+* SVG for exported diagrams
+====
+
+Images need to be placed in a  callled `images` in the same directory as the `.adoc` file you wish to use the picture in.
+
+==== Diagrams
+
+If you store Ascii type diagrams in separate files please use their respective type as the file extension, e.g.:
+
+* DITAA: .ditaa
+* Mermaid: .mermaid
+* PlantUML: .plantuml
+* Shaape: .shaape
+
+This makes filtering for this type of files much more convenient. These "extensions" can be used identically to regular file extensions in the include macro.
+
+include::{directory}style/diagrams.adoc[Diagrams]
+
+// Further information
+
+include::{directory}style/style.adoc[Writing Style,leveloffset=+1]
+
+include::{directory}style/structure.adoc[Document structuring rules,leveloffset=+1]
+
+include::{directory}style/formatting.adoc[Formatting Rules,leveloffset=+1]
+
+include::{directory}style/doc_attributes.adoc[Attributes,leveloffset=+1]
+
+include::{directory}toolchain/export-pdf.adoc[Export to PDF,leveloffset=+1]
+
+include::{directory}toolchain/maintainers.adoc[Maintainer Info,leveloffset=+1]

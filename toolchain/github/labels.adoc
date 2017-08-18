@@ -1,0 +1,64 @@
+= Pull Request Labels
+:imagesdir: {docdir}/images/
+
+== Label Types
+
+There are two types of labels. Branch or version labels and status labels.
+
+IMPORTANT: Requests that have `on-hold` or `need-fixes` labels MUST NOT be merged!
+
+.Branch Labels
+[options="header",cols="2"]
+|===
+|Label
+|Description
+
+|image:labels/develop.png[develop]
+
+|Indicates that the request should be merged into the current development branch.
+
+a|image:labels/versions.png[Version branches]
+a|Each release gets its own label. These are to be set to indicate into which branches the Pull Request should be merged to.
+
+NOTE: If the next minor release is not yet defined create a .x branch and label.
+
+|===
+
+=== Merging both develop and release branch
+
+If larger changes are indicated to be merged into `develop` and a `release or version` branch, a thorough review is _required_ to make sure that all changes actually apply to both versions.
+
+The `develop` branch can contain major rewrites that will break consistency or give a wrong state of development if merged back into released versions without review.
+
+.Status Labels
+[options="header",cols="2"]
+|===
+|Label
+|Description
+
+|image:labels/backport.png[backport]
+|This indicates that the requested changes must be backported to a previous version of the documentation. This can involve cherry picking of single commits to integrate changes that are embedded in larger rewrites. All requests with this label must be thoroughly reviewed and merged by hand.
+
+*Only minor changes must be merged directly in GitHub.*
+
+|image:labels/hotfix.png[hotfix]
+|This label indicates that a released version must be changed without a version bump. All affected versions must be listed with labels.
+
+*If only specific versions are affected, indicate this in the comments.*
+
+|image:labels/on-hold.png[on-hold]
+|Some clarification is needed or other rewrites/circumstances block this pull request from being merged.
+
+*Only when this label is removed can the merge label be set and actioned.*
+
+|image:labels/needs-fixes.png[needs-fixes]
+|Review has determined that some of the changes need to be reworked. This overrides the 'merge' label and means changes must not be merged.
+
+*Optionally the 'on-hold' label can be set as well.*
+
+|image:labels/merge.png[merge]
+a|Reviews have approved these changes and they can be merged into all indicated branches.
+
+IMPORTANT: This label may only be assigned by the maintainer.
+
+|===

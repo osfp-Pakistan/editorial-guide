@@ -1,0 +1,3 @@
+= README
+
+If you wish to contribute please grab the link:https://github.com/arago/editorial-guide/raw/develop/editorial_guide.pdf[LATEST PDF] and start reading.

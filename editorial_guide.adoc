@@ -1,8 +1,8 @@
 = Editorial Guide for Arago Documentation
 :author: Markus Napp
 :email: mnapp@arago.co
-:revnumber: 1.5 DRAFT
-:revdate: 18/08/2017
+:revnumber: 1.6 DRAFT
+:revdate: 28/10/2017
 :doctype: book
 :toc:
 :sectnums:
@@ -33,6 +33,8 @@ include::{directory}contributing.adoc[Contributor Quickstart,leveloffset=+1]
 It's is much preferred to use the suggested default file types and extensions:
 
 ==== Documents
+
+All documents are to be written in _American English_. Some important differences to note are described in link:https://www.spreeder.com/important-american-and-british-spelling-differences-you-should-know-2/[this handy guide].
 
 Text documents that are part of the contribution should be in AsciiDoctor syntax (`.adoc`). This allows us to efficiently manage changes and ensure a corporate identity and style across the published documents. If you need to generate a "hard" version of a specific document version you can link:editorial-guide.html#export-pdf[export it to PDF] using the asciidoctor-pdf tool.
 
